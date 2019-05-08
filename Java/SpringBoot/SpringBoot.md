@@ -166,18 +166,20 @@ score: 90
 
 ## mybatis依赖
 
-```
-<!--mybatis起步依赖-->
-<dependency>
-<groupId>org.mybatis.spring.boot</groupId>
-<artifactId>mybatis-spring-boot-starter</artifactId>
-<version>1.1.1</version>
-</dependency>
+* **spring-boot-starter在后面不是spring-boot-starter启动器，而是mybatis提供的**
+
+```xml
+        <!--mybatis起步依赖-->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.0.1</version>
+        </dependency>
 ```
 
 ## SQL驱动
 
-```
+```xml
         <!-- MySQL连接驱动 -->
         <dependency>
             <groupId>mysql</groupId>
@@ -188,7 +190,7 @@ score: 90
 
 ## SQL连接信息
 
-```
+```properties
 #DB Configuration:
 spring.datasource.driverClassName=com.mysql.jdbc.Driver
 spring.datasource.url=jdbc:mysql://127.0.0.1:3306/test?
@@ -199,19 +201,32 @@ spring.datasource.password=root
 
 ## mybatis连接信息
 
-```
-#spring集成Mybatis环境
+```properties
 #pojo别名扫描包
 mybatis.type-aliases-package=com.itheima.domain
 #加载Mybatis映射文件
-mybatis.mapper-locations=classpath:mapper/*Mapper.xml
+mybatis.mapper-locations=classpath:mapper/*.xml
 ```
+
+## MapperScan注解
+
+```java
+@SpringBootApplication
+@MapperScan("com.aib.dao")  //扫描Mapper接口
+public class Application {
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+}
+```
+
+
 
 # 部署项目
 
 * **添加打包插件**
 
-```
+```xml
     <!--打包成JAR包进行部署插件-->
     <build>
         <plugins>
