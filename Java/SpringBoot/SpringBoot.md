@@ -327,9 +327,31 @@ public class Person {
 }
 ```
 
-# 整合
+# H5跨域
 
-## Token验证机制
+```java
+@Configuration
+public class CorsConfig {
+    private CorsConfiguration buildConfig() {
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.addAllowedOrigin("*"); // 允许任何域名使用
+        corsConfiguration.addAllowedHeader("*"); // 允许任何头
+        corsConfiguration.addAllowedMethod("*"); // 允许任何方法（post、get等）
+        return corsConfiguration;
+    }
+
+    @Bean
+    public CorsFilter corsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", buildConfig()); // 对接口配置跨域设置
+        return new CorsFilter(source);
+    }
+}
+```
+
+
+
+# Token验证机制
 
 * **引入依赖**
 
@@ -455,7 +477,7 @@ public class WebConfig implements WebMvcConfigurer {
 }
 ```
 
-## 图片服务器
+# 图片服务器
 
 ```properties
 #服务器访问图片路径
