@@ -16,7 +16,7 @@ data class EventData<D>(var data: D)
 * **需要一开始就得注册EventBus**
 * **自定义接收数据源的方法**
 * **销毁页面需要解注册**
-```
+```java
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

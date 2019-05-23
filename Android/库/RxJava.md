@@ -316,7 +316,7 @@ E/HLP: 4
 
 # 转换操作符
 
-## map
+## map()
 
 * **map 可以将被观察者发送的数据类型转变成其他的类型**
 
@@ -2674,32 +2674,23 @@ D/HLP: ========================onNext true
 * **判断事件序列是否为空**
 
 ```java
-        Observable.create(new ObservableOnSubscribe<Integer>() {
+Observable.create(new ObservableOnSubscribe < Integer > () {
 
-            @Override
-            public void subscribe(ObservableEmitter<Integer> e) throws Exception {
-                e.onComplete();
-            }
-        })
-                .isEmpty()
-                .subscribe(new Consumer<Boolean>() {
-                    @Override
-                    public void accept(Boolean aBoolean) throws Exception {
-                        Log.d(TAG, "========================onNext " + aBoolean);
-                    }
-                });
+    @Override
+    public void subscribe(ObservableEmitter < Integer > e) throws Exception {
+        e.onComplete();
+    }
+})
+.isEmpty()
+.subscribe(new Consumer < Boolean > () {
+    @Override
+    public void accept(Boolean aBoolean) throws Exception {
+        Log.d(TAG, "========================onNext " + aBoolean);
+    }
+});
 
 //输出
-D/HLP: ========================integer 1
-D/HLP: ========================integer 2
-D/HLP: ========================integer 3
-D/HLP: ========================integer 4
-D/HLP: ========================onSubscribe 
-D/HLP: ========================onNext 5
-D/HLP: ========================onComplete 
-D/HLP: ========================onNext true
-D/HLP: ========================onNext true
-D/HLP: ========================onNext true
+========================onNext true
 ```
 
 ## amb()
