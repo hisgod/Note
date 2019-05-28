@@ -18,6 +18,96 @@ public interface ViewModelModule {
 }
 ```
 
+## @Scop
+
+> Activity包含模块
+
+```kotlin
+@Module
+interface ActivityModule {
+    @ContributesAndroidInjector(
+        modules = [
+            MainModule::class	//包含一个模块，提供一些本Activity使用的实例
+        ]
+    )
+    fun mainActivity(): MainActivity
+}
+```
+
+> MainModule
+
+只是简单的提供一个`Book`实例
+
+```kotlin
+@Module
+class MainModule {
+    @Provides
+    fun provideBook() = Book()
+}
+```
+
+> 测试结果
+
+* **结果false，有时候很想只提供单个实例**
+
+```kotlin
+class MainActivity : Activity() {
+    @Inject
+    lateinit var book1: Book
+
+    @Inject
+    lateinit var book2: Book
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        Log.e("HLP", (book1 == book2).toString())
+    }
+}
+
+//输出
+false
+```
+
+> 希望提供单个实例
+
+* **自定义Scop**
+
+```kotlin
+@Retention(AnnotationRetention.RUNTIME)    // Not used at runtime, but JSR-330
+@Scope                                 // requires that @Scopes are kept at RUNTIME.
+annotation class ActivityScope     // PerActivity is also a good name.
+```
+
+> MainModule添加自定义注解
+
+```kotlin
+@Module
+class MainModule {
+    @Provides
+    @ActivityScope
+    fun provideBook() = Book()
+}
+```
+
+> ActivityModule添加注解
+
+```kotlin
+@Module
+interface ActivityModule {
+    @ContributesAndroidInjector(
+        modules = [
+            MainModule::class
+        ]
+    )
+    @ActivityScope
+    fun mainActivity(): MainActivity
+}
+```
+
+
+
 #  全局单例ViewModelProvider.Factory
 
 # 入门
@@ -141,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
 }
 ```
 
-#Activity
+# Activity
 
 >@Module
 
@@ -252,7 +342,7 @@ public class MyApplication extends Application implements HasActivityInjector {
 
 ```
 
-#Fragment
+# Fragment
 
 >被注入对象
 
@@ -435,3 +525,6 @@ public class MyApplication extends Application implements HasActivityInjector {
     }
 }
 ```
+
+
+
