@@ -2,15 +2,58 @@
 
 ## @Inject
 
+> 实例化对象
 
+- `@Inject`告知dagger可以实例化此对象
+
+```java
+public class Son {
+    @Inject
+    public Son() {
+        Log.e("HLP", "儿子");
+    }
+}
+```
+
+> 构建注入器
+
+使用`@Component`注解，标识器件，可以理解为注射器，保存需要注入到某个类的信息
+
+```java
+@dagger.Component
+public interface Component {
+    //可以将@Inject生成的对象注入到MainActivity中
+    void inject(MainActivity mainActivity);
+}
+```
+
+> 注入目标
+
+```java
+public class MainActivity extends AppCompatActivity {
+    @Inject
+    Son son;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    
+        //创建注射器
+        DaggerComponent.create().inject(this);
+
+        Log.e("HLP", son.toString());
+    }
+}
+```
 
 ## @Binds
 
-* **都是提供对象的作用**
+* **和`@Provides`都是提供对象的作用**
 * **`@Provides`需要实现方法**
 * **`@Binds`只需要知道谁来提供就行**
 
-```
+```kotlin
 @Module
 public interface ViewModelModule {
     @Binds
@@ -106,52 +149,114 @@ interface ActivityModule {
 }
 ```
 
+## @Name
 
+如果Module提供的对象，是不同构造函数生成的，dagger就不知道注入哪个对象
 
-#  全局单例ViewModelProvider.Factory
+```kotlin
+@Module
+class AppModule {
+    @Named("int")
+    @Provides
+    fun getPersonWithInt(): Person {
+        return Person()
+    }
 
-# 入门
-
-> 实例化对象
-
-* `@Inject`告知dagger可以实例化此对象
-
-```java
-public class Son {
-    @Inject
-    public Son() {
-        Log.e("HLP", "儿子");
+    @Named("str")
+    @Provides
+    fun getPersonWithStr(): Person {
+        return Person()
     }
 }
 ```
 
->构建注入器
+> 测试
 
-使用`@Component`注解，标识器件，可以理解为注射器，保存需要注入到某个类的信息
-```java
-@dagger.Component
-public interface Component {
-    //可以将@Inject生成的对象注入到MainActivity中
-    void inject(MainActivity mainActivity);
+```kotlin
+public class MainActivity extends AppCompatActivity {
+
+    @Named("str")
+    @Inject
+    Person person;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+    }
 }
 ```
 
->注入目标
+## @Qualifier
 
-```java
+因为`@Name`形式很容易因为字符串拼写的错误，导致注入失败情况，所以才有自定义注解
+
+> 自定义注解
+
+```kotlin
+@Qualifier
+@Retention(AnnotationRetention.RUNTIME)
+annotation class Type
+```
+
+> 使用自定义注解标记
+
+```kotlin
+@Module
+class AppModule {
+    
+    @Type
+    @Provides
+    fun getPersonWithInt(): Person {
+        return Person()
+    }
+}
+```
+
+> 测试
+
+```kotlin
 public class MainActivity extends AppCompatActivity {
+
+    @Type
     @Inject
-    Son son;
+    Person person;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    
-        //创建注射器
-        DaggerComponent.create().inject(this);
 
-        Log.e("HLP", son.toString());
+    }
+}
+```
+
+# Lazy&Provide&普通注入
+
+* **普通注入：默认会实例化对象，单例情况取决Module的注解限定符**
+
+* **Lazy：只有get（）调用才会去实例化，但没有注入到寄主对象中，永远是单例情况**
+* **Provide：同Lazy，但是单例情况，取决Module中注解**
+
+```kotlin
+public class MainActivity extends AppCompatActivity {
+
+    @Inject Person person;
+    
+    @Inject
+    Lazy<Person> personLazy;
+
+    @Inject
+    Provider<Person> personProvider;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        Log.e("HLP", personLazy.get().toString());
+        Log.e("HLP", personProvider.get().toString());
     }
 }
 ```
