@@ -17,3 +17,15 @@
     }
 ```
 
+# 自定义视图
+
+## 问题1：View显示不出来
+
+自定义View数据显示，需要在ViewPager和TabLayout绑定之后，才能进行绑定数据
+
+```java
+tablayout.setupWithViewPager(viewPage);
+```
+
+
+
