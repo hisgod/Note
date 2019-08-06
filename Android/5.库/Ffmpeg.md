@@ -22,3 +22,9 @@ ffmpeg -i input.wav -f s16le ouput.pcm
 
 ```
 
+> 播放PCM
+
+```
+ffplay -ac 2 -ar 44100 -f s16le out.pcm
+```
+
