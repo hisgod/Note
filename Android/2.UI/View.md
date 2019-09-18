@@ -70,12 +70,13 @@ android:translationZ="2dp"
 
 # onMeasure(x,y)
 
->测量模式大小
-| 测量模式    | 含义             |
-| ----------- | ---------------- |
-| UNSPECIFIED | 对应match_parent |
-| AT_MOST     | 对应wrap_content |
-| EXACTLY     | 固定尺寸         |
+> 测量模式大小
+
+| 测量模式    | 含义                             |
+| ----------- | -------------------------------- |
+| UNSPECIFIED | 不确定的值                       |
+| AT_MOST     | 至多的值(wrap_content)           |
+| EXACTLY     | 确定的值(固定大小或match_parent) |
 
 >自定义View代码
 ```
