@@ -2,7 +2,7 @@
 
 * **添加Maven依赖**
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -37,7 +37,7 @@
 * **创建`Application`类，类上使用注解`@SpringBootApplication`**
 * **在`main`方法调用`SpringApplication.run(Application.class);`**
 
-```
+```java
 @SpringBootApplication
 public class Application {
     public static void main(String[] args) {
@@ -52,7 +52,7 @@ public class Application {
 
 ## 引入依赖库
 
-```
+```xml
 <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
 <dependency>
     <groupId>org.springframework.boot</groupId>
@@ -236,7 +236,7 @@ score: 90
 
 * **注入实体类**
 
-```
+```java
     /**
      * <bean class="Person">
      *      <property name="lastName" value="字面量/${key}从环境变量、配置文件中获取值/#{SpEL}"></property>
@@ -281,7 +281,7 @@ public class Person {
 
 * **添加依赖，在编译项目时调用该处理器**
 
-```
+```xml
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
