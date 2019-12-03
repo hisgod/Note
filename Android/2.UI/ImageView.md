@@ -36,3 +36,6 @@
 
 把原图按照比例放大缩小到ImageView的高度，显示在ImageVIew的end（后部/尾部/底部）
 
+# adjustViewBounds
+
+ 是否保持原图的长宽比，单独设置不起作用，需要配合maxWidth或maxHeight一起使用 

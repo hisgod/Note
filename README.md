@@ -8,7 +8,7 @@ ConstraintLayout
 
 https://www.cnblogs.com/tsingke/p/9068787.html
 
-aurora-imui(聊天IM框架)
+OKHTTP
 
- https://github.com/jpush/aurora-imui/issues/363 
+ https://www.jianshu.com/p/9aa969dd1b4d 
 
