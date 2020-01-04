@@ -199,7 +199,7 @@ public class MyBehavior extends CoordinatorLayout.Behavior<View> {
 
 ![](assets/a-1558002544760.gif)
 
-```
+```java
 /**
      * 表示是否给应用了Behavior 的View 指定一个依赖的布局，通常，当依赖的View 布局发生变化时
      * 不管被被依赖View 的顺序怎样，被依赖的View也会重新布局
