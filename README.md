@@ -1,6 +1,6 @@
 # Note
 
-约束布局：https://www.jianshu.com/p/17ec9bd6ca8a
+约束布局:https://segmentfault.com/a/1190000014876944
 
 C语言-联合体
 
