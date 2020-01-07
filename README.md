@@ -1,6 +1,6 @@
 # Note
 
-约束布局:https://segmentfault.com/a/1190000014876944
+Java线性数据结构
 
 C语言-联合体
 
