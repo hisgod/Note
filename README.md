@@ -1,6 +1,6 @@
 # Note
 
-约束布局案例(MotionLayout)由于比较新，所以目前还未发布正式版
+Java集合
 
 Java线性数据结构
 
