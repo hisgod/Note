@@ -1,6 +1,6 @@
 # Note
 
-Kotlin协程+Retrofit
+opencv画线
 
 Java集合
 
@@ -13,7 +13,5 @@ C++类与对象
 Mybatis使用
 
 Jackson序列化与反序列化
-
-opencv使用
 
 设计模式
