@@ -23,4 +23,3 @@ Fragment prev=activity.getSupportFragmentManager().findFragmentByTag("loadingDia
         df.dismiss();
      }
 ```
-
