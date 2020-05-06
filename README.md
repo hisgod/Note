@@ -1,11 +1,5 @@
 # Note
 
-HTTPS和HTTP支持
-
-opencv画线
-
-Java集合
-
 Java线性数据结构
 
 C语言-联合体
