@@ -1,33 +1,3 @@
-# 热部署
-
-* **无需重写运行Tomcat即可运行修改后的代码**
-
-## 引入依赖库
-
-```xml
-<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-devtools</artifactId>
-    <version>2.1.4.RELEASE</version>
-</dependency>
-
-```
-
-## 开启自动编译
-
-**步骤1**
-
-![](https://leanote.com/api/file/getImage?fileId=5ccbf205ab64410aae002398)
-
-**步骤2**
-
-![](https://leanote.com/api/file/getImage?fileId=5ccbf3a3ab64410aae0023e7)
-
-
-
----
-
 # 整合mybatis
 
 ## mybatis依赖
